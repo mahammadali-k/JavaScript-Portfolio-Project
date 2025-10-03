@@ -49,7 +49,7 @@ words.forEach((word) => {
 let currentWordIndex = 0;
 let maxWordIndex = words.length - 1;
 words[currentWordIndex].style.opacity = "1";
-words[currentWordIndex].style.opacity = "1";
+// words[currentWordIndex].style.opacity = "1";
 let changeText = () => {
   let currentWord = words[currentWordIndex];
   let nextWord =
@@ -178,3 +178,65 @@ document
       alert("CV did not download. Please try again later.");
     }
   });
+
+
+
+
+  
+function getProjects() {
+  return JSON.parse(localStorage.getItem("projects")) || [];
+}
+
+function saveProjects(projects) {
+  localStorage.setItem("projects", JSON.stringify(projects));
+}
+
+
+if (document.getElementById("projectForm")) {
+  const form = document.getElementById("projectForm");
+  const projectList = document.getElementById("projectList");
+
+  function renderProjects() {
+    const projects = getProjects();
+    projectList.innerHTML = "";
+    projects.forEach((p, index) => {
+      const div = document.createElement("div");
+      div.classList.add("project-item");
+      div.innerHTML = `
+        <h3>${p.title}</h3>
+        <img src="${p.image}" width="150">
+        <p>${p.description}</p>
+        <button onclick="deleteProject(${index})">Delete</button>
+      `;
+      projectList.appendChild(div);
+    });
+  }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const title = document.getElementById("title").value;
+    const image = document.getElementById("image").value;
+    const description = document.getElementById("description").value;
+
+    const projects = getProjects();
+    projects.push({ title, image, description });
+    saveProjects(projects);
+    renderProjects();
+
+    form.reset();
+  });
+
+  
+
+  window.deleteProject = function(index) {
+    const projects = getProjects();
+    projects.splice(index, 1);
+    // saveProjects(projects);
+    renderProjects();
+  };
+
+  renderProjects();
+}
+
+
+
