@@ -141,7 +141,7 @@ let sections = document.querySelectorAll("section");
 function activeMenu() {
   let len = sections.length;
   while (--len && window.scrollY + 97 < sections[len].offsetTop) {}
-  if (menuLi && menuLi[len]) { // Added check for menuLi[len]
+  if (menuLi && menuLi[len]) { 
     menuLi.forEach((sec) => sec.classList.remove("active"));
     menuLi[len].classList.add("active");
   }
@@ -251,6 +251,62 @@ arrow.addEventListener('click', () => {
 
 
 
+
+// document.getElementById('downloadCvBtn').addEventListener('click', async function(e) {
+//   e.preventDefault();
+//   try {
+//     const url = 'C:\\Users\\Rahman Karimov\\Desktop\\JS-Portfolio\\img\\MAHAMMADALI-KARIMOV-FlowCV-Resume-20250804 (1).pdf'; 
+//     const resp = await fetch(url);
+//     console.log(url)
+//     if (!resp.ok) throw new Error('File not found: ' + resp.status);
+
+//     const blob = await resp.blob();
+//     const filename = 'Mahammadali_Karimov_CV.pdf';
+
+   
+//     const link = document.createElement('a');
+//     link.href = URL.createObjectURL(blob);
+//     link.download = filename;
+//     document.body.appendChild(link);
+//     link.click();
+    
+//     setTimeout(() => {
+//       URL.revokeObjectURL(link.href);
+//       link.remove();
+//     }, 100);
+//   } catch (err) {
+//     console.error(err);
+//     alert('CV did not download. Please try again later.');
+//   }
+// });
+
+
+
+document.getElementById('downloadCvBtn').addEventListener('click', async function(e) {
+  e.preventDefault();
+  try {
+    const url = './img/MAHAMMADALI-KARIMOV-FlowCV-Resume-20250804.pdf';
+    const resp = await fetch(url);
+    if (!resp.ok) throw new Error('File not found: ' + resp.status);
+
+    const blob = await resp.blob();
+    const filename = 'Mahammadali_Karimov_CV.pdf';
+
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+
+    setTimeout(() => {
+      URL.revokeObjectURL(link.href);
+      link.remove();
+    }, 100);
+  } catch (err) {
+    console.error(err);
+    alert('CV did not download. Please try again later.');
+  }
+});
 
 
 
