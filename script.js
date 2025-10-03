@@ -156,7 +156,7 @@ document
   .addEventListener("click", async function (e) {
     e.preventDefault();
     try {
-      const url = "./img/MAHAMMADALI-KARIMOV-FlowCV-Resume-20250804.pdf";
+      const url = "./img/MAHAMMADALI-KARIMOV-FlowCV-Resume-20250804 (1).pdf";
       const resp = await fetch(url);
       if (!resp.ok) throw new Error("File not found: " + resp.status);
 
@@ -174,10 +174,11 @@ document
         link.remove();
       }, 100);
     } catch (err) {
-      console.error(err);
+      // console.error(err);
       alert("CV did not download. Please try again later.");
     }
   });
+  console.log(document.getElementById("projectForm"));
 
 
 
@@ -231,7 +232,7 @@ if (document.getElementById("projectForm")) {
   window.deleteProject = function(index) {
     const projects = getProjects();
     projects.splice(index, 1);
-    // saveProjects(projects);
+    saveProjects(projects);
     renderProjects();
   };
 
