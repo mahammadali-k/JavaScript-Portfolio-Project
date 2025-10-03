@@ -1,19 +1,3 @@
-// const now = new Date();
-
-// const { createElement } = required("react");
-
-// const year = now.getFullYear();
-// const month = now.getMonth() + 1;
-// const day = now.getDate();
-// const hours = now.getHours();
-// const minutes = now.getMinutes();
-// const seconds = now.getSeconds();
-
-// const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
-// const formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
-
-// console.log(`Current Date and Time: ${year}-${month}-${day} ${hours}:${formattedMinutes}:${formattedSeconds}`);
-
 const colors = [
   "#4d4445ff",
   "#9c825aff",
@@ -49,41 +33,6 @@ const animatedCircles = (event) => {
 };
 
 window.addEventListener("mousemove", animatedCircles);
-
-// const colors = ['#eb3a54', '#f79f1f', '#6ab04c', '#2980b9', '#8e44ad'];
-// const animatedCircles = (event) => {
-//   let circle = document.createElement('div');
-//   circle.setAttribute("class", "circle");
-//   document.body.appendChild(circle);
-
-//   let color = colors[Math.floor(Math.random() * colors.length)];
-//   circle.style.position = "fixed";
-//   circle.style.pointerEvents = "none";
-//   circle.style.border = `0px solid transparent`;
-//   circle.style.borderRadius = "50%";
-//   circle.style.width = "30px";
-//   circle.style.height = "30px";
-//   circle.style.left = (event.clientX - 15) + "px";
-//   circle.style.top = (event.clientY - 15) + "px";
-//   circle.style.opacity = 0.8;
-//   circle.style.boxShadow = `0 0 20px 8px ${color}, 0 0 60px 20px ${color}55`;
-//   circle.style.background = `${color}55`;
-//   circle.style.transition = 'all 0.7s cubic-bezier(.4,2,.6,.9)';
-
-//   setTimeout(() => {
-//     circle.style.opacity = 0;
-//     circle.style.transform = "scale(2)";
-//     circle.style.boxShadow = `0 0 60px 40px ${color}22`;
-//   }, 10);
-
-//   setTimeout(() => {
-//     circle.remove();
-//   }, 700);
-// };
-
-// window.addEventListener("mousemove", animatedCircles);
-
-// window.addEventListener("mousemove",animatedCircles);
 
 let words = document.querySelectorAll(".word");
 words.forEach((word) => {
@@ -129,101 +78,59 @@ var mixer = mixitup(".portfolio-gallery");
 let menuLi = document.querySelectorAll(".header ul li a");
 let sections = document.querySelectorAll("section");
 
-// function activeMenu() {
-//   let len = sections.length;
-//   while (--len && window.scrollY + 97 < sections[len].offsetTop) {}
-//   if (menuLi) {
-//     menuLi.forEach((sec) => sec.classList.remove("active"));
-//     menuLi[len].classList.add("active");
-//   }
-// }
-
 function activeMenu() {
   let len = sections.length;
   while (--len && window.scrollY + 97 < sections[len].offsetTop) {}
-  if (menuLi && menuLi[len]) { 
+  if (menuLi && menuLi[len]) {
     menuLi.forEach((sec) => sec.classList.remove("active"));
     menuLi[len].classList.add("active");
   }
 }
 
-
-
-
-
-
-// activeMenu();
-// window.addEventListener("scroll", activeMenu);
-
-
-
-
-// document.querySelectorAll('.navlist a').forEach(link => {
-//   link.addEventListener('click', function(e) {
-//     e.preventDefault(); // default jump-u dayandır
-//     const target = document.querySelector(this.getAttribute('href'));
-//     target.scrollIntoView({ behavior: 'smooth' }); // smooth scroll
-//   });
-// });
-
-
-
-
-const form = document.querySelector('contact');
+const form = document.querySelector("contact");
 console.log(form);
-
 
 const messages = [];
 
+contact.addEventListener("submit", (event) => {
+  event.preventDefault();
 
-contact.addEventListener('submit', (event) => {
-  event.preventDefault(); 
-  
-  
   const name = form.querySelector('input[name="name"]').value;
   const email = form.querySelector('input[name="email"]').value;
   const subject = form.querySelector('input[name="subject"]').value;
   const message = form.querySelector('textarea[name="message"]').value;
-  
- 
+
   const messageObj = {
     name,
     email,
     subject,
     message,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   };
-  
-  
+
   messages.push(messageObj);
-  
-  
+
   form.reset();
-  
- 
-  const successMessage = document.createElement('p');
-  successMessage.textContent = 'Your message has been saved!';
+
+  const successMessage = document.createElement("p");
+  successMessage.textContent = "Your message has been saved!";
   form.parentNode.insertBefore(successMessage, form.nextSibling);
 });
 
-
-window.addEventListener('beforeunload', () => {
-  localStorage.setItem('messages', JSON.stringify(messages));
+window.addEventListener("beforeunload", () => {
+  localStorage.setItem("messages", JSON.stringify(messages));
 });
 
-
-const savedMessages = JSON.parse(localStorage.getItem('messages'));
+const savedMessages = JSON.parse(localStorage.getItem("messages"));
 if (savedMessages) {
   messages.push(...savedMessages);
 }
 
-
-
 const arrow = document.querySelector('i[class="bx bx-up-arrow-alt"]');
 
-arrow.addEventListener('click', () => {
+arrow.addEventListener("click", () => {
   const top = document.documentElement.scrollTop;
-  const duration = 500; 
+  const duration = 500;
 
   const easeInOutQuad = (t) => {
     t /= duration / 2;
@@ -236,82 +143,38 @@ arrow.addEventListener('click', () => {
     if (timestamp === undefined) timestamp = 0;
     const progress = timestamp / duration;
     const easedProgress = easeInOutQuad(progress);
-    document.documentElement.scrollTop = top - (easeInOutQuad(progress) - easedProgress) * (top - 0);
+    document.documentElement.scrollTop =
+      top - (easeInOutQuad(progress) - easedProgress) * (top - 0);
     if (timestamp < duration) requestAnimationFrame(animateScroll);
   };
 
   requestAnimationFrame(animateScroll);
 });
 
+document
+  .getElementById("downloadCvBtn")
+  .addEventListener("click", async function (e) {
+    e.preventDefault();
+    try {
+      const url = "./img/MAHAMMADALI-KARIMOV-FlowCV-Resume-20250804.pdf";
+      const resp = await fetch(url);
+      if (!resp.ok) throw new Error("File not found: " + resp.status);
 
+      const blob = await resp.blob();
+      const filename = "Mahammadali_Karimov_CV.pdf";
 
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
 
-
-
-
-
-
-
-// document.getElementById('downloadCvBtn').addEventListener('click', async function(e) {
-//   e.preventDefault();
-//   try {
-//     const url = 'C:\\Users\\Rahman Karimov\\Desktop\\JS-Portfolio\\img\\MAHAMMADALI-KARIMOV-FlowCV-Resume-20250804 (1).pdf'; 
-//     const resp = await fetch(url);
-//     console.log(url)
-//     if (!resp.ok) throw new Error('File not found: ' + resp.status);
-
-//     const blob = await resp.blob();
-//     const filename = 'Mahammadali_Karimov_CV.pdf';
-
-   
-//     const link = document.createElement('a');
-//     link.href = URL.createObjectURL(blob);
-//     link.download = filename;
-//     document.body.appendChild(link);
-//     link.click();
-    
-//     setTimeout(() => {
-//       URL.revokeObjectURL(link.href);
-//       link.remove();
-//     }, 100);
-//   } catch (err) {
-//     console.error(err);
-//     alert('CV did not download. Please try again later.');
-//   }
-// });
-
-
-
-document.getElementById('downloadCvBtn').addEventListener('click', async function(e) {
-  e.preventDefault();
-  try {
-    const url = './img/MAHAMMADALI-KARIMOV-FlowCV-Resume-20250804.pdf';
-    const resp = await fetch(url);
-    if (!resp.ok) throw new Error('File not found: ' + resp.status);
-
-    const blob = await resp.blob();
-    const filename = 'Mahammadali_Karimov_CV.pdf';
-
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-
-    setTimeout(() => {
-      URL.revokeObjectURL(link.href);
-      link.remove();
-    }, 100);
-  } catch (err) {
-    console.error(err);
-    alert('CV did not download. Please try again later.');
-  }
-});
-
-
-
-
-
-
-
-
+      setTimeout(() => {
+        URL.revokeObjectURL(link.href);
+        link.remove();
+      }, 100);
+    } catch (err) {
+      console.error(err);
+      alert("CV did not download. Please try again later.");
+    }
+  });
